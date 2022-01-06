@@ -7,7 +7,7 @@
     "jest": true
   },
   "extends": ["react-app", "airbnb", "prettier"],
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true,
@@ -75,23 +75,10 @@
     "react/prop-types": "warn",
     "no-unused-expressions": ["warn", { "allowShortCircuit": true, "allowTernary": true }],
     "react/jsx-props-no-spreading": "off",
-    "prettier/prettier": [
-      "error",
-      {
-        "useTabs": false,
-        "printWidth": 120,
-        "tabWidth": 2,
-        "singleQuote": true,
-        "trailingComma": "all",
-        "jsxBracketSameLine": false,
-        "bracketSpacing": true,
-        "arrowParens": "avoid",
-        "semi": true
-      }
-    ],
     "no-plusplus": "off",
     "no-nested-ternary": "off",
     "no-return-assign": "off",
+    "react/function-component-definition": ["off"],
     "no-param-reassign": [
       "error",
       {
