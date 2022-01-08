@@ -13,10 +13,12 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 // react-router components
 import { useLocation, Link } from 'react-router-dom';
+
+import _ from 'lodash';
 
 // prop-types is a library for typechecking of props.
 import PropTypes from 'prop-types';
@@ -40,12 +42,12 @@ import NotificationItem from 'components/NotificationItem';
 import { navbar, navbarContainer, navbarRow, navbarIconButton, navbarMobileMenu } from 'components/GeneralNavbar/styles';
 
 // Material Dashboard 2 PRO React context
-import { useMaterialUIController, setTransparentNavbar, setMiniSidenav, setOpenConfigurator } from 'context';
+import { useMaterialUIController, setTransparentNavbar, setMiniSidenav, setOpenConfigurator, setSearch } from 'context';
 
 function GeneralNavbar({ absolute, light, isMini }) {
   const [navbarType, setNavbarType] = useState();
   const { controller, dispatch } = useMaterialUIController();
-  const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator, darkMode } = controller;
+  const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator, darkMode, search } = controller;
   const [openMenu, setOpenMenu] = useState(false);
   const route = useLocation().pathname.split('/').slice(1);
 
@@ -79,6 +81,12 @@ function GeneralNavbar({ absolute, light, isMini }) {
   const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
   const handleOpenMenu = event => setOpenMenu(event.currentTarget);
   const handleCloseMenu = () => setOpenMenu(false);
+
+  const onSearch = e => {
+    setSearch(dispatch, e.target.value);
+  };
+
+  const debouncedOnSearch = useMemo(() => _.debounce(e => onSearch(e), 650), [search]);
 
   // Render the notifications menu
   const renderMenu = () => (
@@ -125,10 +133,10 @@ function GeneralNavbar({ absolute, light, isMini }) {
         {isMini ? null : (
           <MDBox sx={theme => navbarRow(theme, { isMini })}>
             <MDBox pr={1}>
-              <MDInput label="Search here" />
+              <MDInput label="Search here" onChange={debouncedOnSearch} />
             </MDBox>
             <MDBox color={light ? 'white' : 'inherit'}>
-              <Link to="/authentication/sign-in/basic">
+              <Link to="/Referral">
                 <IconButton sx={navbarIconButton} size="small" disableRipple>
                   <Icon sx={iconsStyle}>account_circle</Icon>
                 </IconButton>

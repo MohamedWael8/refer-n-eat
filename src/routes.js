@@ -41,7 +41,8 @@ import React from 'react';
 import Icon from '@mui/material/Icon';
 
 // Layouts
-import Directory from './pages/Directory';
+import Directory from 'pages/Directory';
+import Referral from 'pages/Referral';
 
 const routes = [
   {
@@ -51,6 +52,22 @@ const routes = [
     icon: <Icon fontSize="small">dashboard</Icon>,
     route: '/directory',
     component: <Directory />,
+  },
+  {
+    type: 'collapse',
+    name: 'Referral',
+    key: 'referral',
+    icon: <Icon fontSize="small">referral</Icon>,
+    route: '/referral',
+    component: <Referral amount="3" />,
+  },
+  {
+    type: 'collapse',
+    name: 'Referral',
+    key: 'referral',
+    icon: <Icon fontSize="small">referral</Icon>,
+    route: '/referral-done',
+    component: <Referral amount="2" />,
   },
 ];
 
