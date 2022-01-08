@@ -7,9 +7,9 @@ import { RESTAURANTS } from '../../api/RestaurantAPI';
 
 const restaurants = ['Some', 'Things', 'Never', 'Change'];
 
-const Directory = () => {
+function Directory() {
   const { data, error, loading } = useAxios({
-    axiosInstance: axiosInstance,
+    axiosInstance,
     url: RESTAURANTS,
   });
 
@@ -24,6 +24,6 @@ const Directory = () => {
       ))}
     </div>
   );
-};
+}
 
 export default Directory;
