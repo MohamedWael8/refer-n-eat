@@ -60,7 +60,13 @@ function PaymentMethod() {
               </MDTypography>
               <MDBox ml="auto" lineHeight={0} color={darkMode ? 'white' : 'dark'}>
                 <Tooltip title="Copy Referral Code" placement="top">
-                  <Icon sx={{ cursor: 'pointer' }} fontSize="small">
+                  <Icon
+                    sx={{ cursor: 'pointer' }}
+                    fontSize="small"
+                    onClick={() => {
+                      navigator.clipboard.writeText(referralCode);
+                    }}
+                  >
                     copy
                   </Icon>
                 </Tooltip>
