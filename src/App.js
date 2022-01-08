@@ -18,7 +18,7 @@ import routes from 'routes';
 import { useMaterialUIController, setOpenConfigurator } from 'context';
 
 function App() {
-  const [controller, dispatch] = useMaterialUIController();
+  const { controller, dispatch } = useMaterialUIController();
   const { direction, darkMode, openConfigurator } = controller;
   const [rtlCache, setRtlCache] = useState(null);
   const { pathname } = useLocation();

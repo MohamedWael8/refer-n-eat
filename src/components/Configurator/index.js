@@ -42,7 +42,7 @@ import {
 } from 'context';
 
 function Configurator() {
-  const [controller, dispatch] = useMaterialUIController();
+  const { controller, dispatch } = useMaterialUIController();
   const { openConfigurator, fixedNavbar, sidenavColor, transparentSidenav, whiteSidenav, darkMode } = controller;
   const [disabled, setDisabled] = useState(false);
   const sidenavColors = ['primary', 'dark', 'info', 'success', 'warning', 'error'];
@@ -81,11 +81,7 @@ function Configurator() {
   const handleDarkMode = () => setDarkMode(dispatch, !darkMode);
 
   // sidenav type buttons styles
-  const sidenavTypeButtonsStyles = ({
-    functions: { pxToRem },
-    palette: { white, dark, background },
-    borders: { borderWidth },
-  }) => ({
+  const sidenavTypeButtonsStyles = ({ functions: { pxToRem }, palette: { white, dark, background }, borders: { borderWidth } }) => ({
     height: pxToRem(39),
     background: darkMode ? background.sidenav : white.main,
     color: darkMode ? white.main : dark.main,
@@ -99,10 +95,7 @@ function Configurator() {
   });
 
   // sidenav type active button styles
-  const sidenavTypeActiveButtonStyles = ({
-    functions: { pxToRem, linearGradient },
-    palette: { white, gradients, background },
-  }) => ({
+  const sidenavTypeActiveButtonStyles = ({ functions: { pxToRem, linearGradient }, palette: { white, gradients, background } }) => ({
     height: pxToRem(39),
     background: darkMode ? white.main : linearGradient(gradients.dark.main, gradients.dark.state),
     color: darkMode ? background.sidenav : white.main,

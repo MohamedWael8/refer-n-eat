@@ -25,30 +25,28 @@ import MDTypographyRoot from 'components/MDTypography/MDTypographyRoot';
 // Material Dashboard 2 React contexts
 import { useMaterialUIController } from 'context';
 
-const MDTypography = forwardRef(
-  ({ color, fontWeight, textTransform, verticalAlign, textGradient, opacity, children, ...rest }, ref) => {
-    const [controller] = useMaterialUIController();
-    const { darkMode } = controller;
+const MDTypography = forwardRef(({ color, fontWeight, textTransform, verticalAlign, textGradient, opacity, children, ...rest }, ref) => {
+  const { controller } = useMaterialUIController();
+  const { darkMode } = controller;
 
-    return (
-      <MDTypographyRoot
-        {...rest}
-        ref={ref}
-        ownerState={{
-          color,
-          textTransform,
-          verticalAlign,
-          fontWeight,
-          opacity,
-          textGradient,
-          darkMode,
-        }}
-      >
-        {children}
-      </MDTypographyRoot>
-    );
-  },
-);
+  return (
+    <MDTypographyRoot
+      {...rest}
+      ref={ref}
+      ownerState={{
+        color,
+        textTransform,
+        verticalAlign,
+        fontWeight,
+        opacity,
+        textGradient,
+        darkMode,
+      }}
+    >
+      {children}
+    </MDTypographyRoot>
+  );
+});
 
 // Setting default values for the props of MDTypography
 MDTypography.defaultProps = {
@@ -62,32 +60,10 @@ MDTypography.defaultProps = {
 
 // Typechecking props for the MDTypography
 MDTypography.propTypes = {
-  color: PropTypes.oneOf([
-    'inherit',
-    'primary',
-    'secondary',
-    'info',
-    'success',
-    'warning',
-    'error',
-    'light',
-    'dark',
-    'text',
-    'white',
-  ]),
+  color: PropTypes.oneOf(['inherit', 'primary', 'secondary', 'info', 'success', 'warning', 'error', 'light', 'dark', 'text', 'white']),
   fontWeight: PropTypes.oneOf([false, 'light', 'regular', 'medium', 'bold']),
   textTransform: PropTypes.oneOf(['none', 'capitalize', 'uppercase', 'lowercase']),
-  verticalAlign: PropTypes.oneOf([
-    'unset',
-    'baseline',
-    'sub',
-    'super',
-    'text-top',
-    'text-bottom',
-    'middle',
-    'top',
-    'bottom',
-  ]),
+  verticalAlign: PropTypes.oneOf(['unset', 'baseline', 'sub', 'super', 'text-top', 'text-bottom', 'middle', 'top', 'bottom']),
   textGradient: PropTypes.bool,
   children: PropTypes.node.isRequired,
   opacity: PropTypes.number,

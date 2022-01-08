@@ -79,13 +79,13 @@ function MaterialUIControllerProvider({ children }) {
     fixedNavbar: true,
     openConfigurator: false,
     direction: 'ltr',
-    layout: 'dashboard',
+    layout: 'general',
     darkMode: false,
   };
 
   const [controller, dispatch] = useReducer(reducer, initialState);
 
-  return <MaterialUI.Provider value={[controller, dispatch]}>{children}</MaterialUI.Provider>;
+  return <MaterialUI.Provider value={{ controller, dispatch }}>{children}</MaterialUI.Provider>;
 }
 
 // Material Dashboard 2 PRO React custom hook for using context
