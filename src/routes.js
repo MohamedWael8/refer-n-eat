@@ -55,6 +55,14 @@ const routes = [
   },
   {
     type: 'collapse',
+    name: 'Directory',
+    key: 'directory',
+    icon: <Icon fontSize="small">dashboard</Icon>,
+    route: '/directory-logged',
+    component: <Directory logged />,
+  },
+  {
+    type: 'collapse',
     name: 'Referral',
     key: 'referral',
     icon: <Icon fontSize="small">referral</Icon>,

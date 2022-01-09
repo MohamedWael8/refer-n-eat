@@ -44,7 +44,7 @@ import { navbar, navbarContainer, navbarRow, navbarIconButton, navbarMobileMenu 
 // Material Dashboard 2 PRO React context
 import { useMaterialUIController, setTransparentNavbar, setMiniSidenav, setOpenConfigurator, setSearch } from 'context';
 
-function GeneralNavbar({ absolute, light, isMini }) {
+function GeneralNavbar({ absolute, light, isMini, logged }) {
   const [navbarType, setNavbarType] = useState();
   const { controller, dispatch } = useMaterialUIController();
   const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator, darkMode, search } = controller;
@@ -136,11 +136,23 @@ function GeneralNavbar({ absolute, light, isMini }) {
               <MDInput label="Search here" onChange={debouncedOnSearch} />
             </MDBox>
             <MDBox color={light ? 'white' : 'inherit'}>
-              <Link to="/Referral">
-                <IconButton sx={navbarIconButton} size="small" disableRipple>
-                  <Icon sx={iconsStyle}>account_circle</Icon>
-                </IconButton>
-              </Link>
+              {!logged ? (
+                <a
+                  href="http://localhost:3001/en/phone-number?redirectionUrl=http://localhost:3000/directory-logged/&countryCode=KW"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <IconButton size="small" disableRipple color="inherit" sx={navbarIconButton}>
+                    <Icon sx={iconsStyle}>login</Icon>
+                  </IconButton>
+                </a>
+              ) : (
+                <Link to="/Referral">
+                  <IconButton sx={navbarIconButton} size="small" disableRipple>
+                    <Icon sx={iconsStyle}>account_circle</Icon>
+                  </IconButton>
+                </Link>
+              )}
               <IconButton size="small" disableRipple color="inherit" sx={navbarMobileMenu} onClick={handleMiniSidenav}>
                 <Icon sx={iconsStyle} fontSize="medium">
                   {miniSidenav ? 'menu_open' : 'menu'}
@@ -182,6 +194,7 @@ GeneralNavbar.propTypes = {
   absolute: PropTypes.bool,
   light: PropTypes.bool,
   isMini: PropTypes.bool,
+  logged: PropTypes.bool.isRequired,
 };
 
 export default GeneralNavbar;

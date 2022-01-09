@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Grid from '@mui/material/Grid';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 
 import MDBox from 'components/MDBox';
 import GeneralLayout from 'layouts/GeneralLayout';
@@ -11,18 +12,16 @@ import DefaultProjectCard from 'components/DefaultProjectCard';
 import { RESTAURANTS, RESTAURANTS_SEARCH } from 'api/RestaurantAPI';
 import { useMaterialUIController } from 'context';
 
-function Directory() {
+function Directory({ logged = false }) {
   const { controller } = useMaterialUIController();
   const { search } = controller;
   const [restaurants, setRestaurants] = useState([]);
   const serializeRestaurantData = rawRestaurants => {
-    console.log('rawRestaurants', rawRestaurants);
     const serializedRestaurantData = rawRestaurants.map(rawRestaurant => {
       const restaurantObject = { ...rawRestaurant?.attributes, id: rawRestaurant.id };
       const restaurantObjectCamelCase = _.mapKeys(restaurantObject, (v, k) => _.camelCase(k));
       return restaurantObjectCamelCase;
     });
-    console.log('serializedRestaurantData', serializedRestaurantData);
     return serializedRestaurantData;
   };
 
@@ -40,7 +39,6 @@ function Directory() {
   };
 
   const searchRestaurants = async searchQuery => {
-    console.log('searchQuery', searchQuery);
     try {
       const response = await axios.get(RESTAURANTS_SEARCH, {
         baseURL: process.env.REACT_APP_BACKEND_URL,
@@ -68,7 +66,7 @@ function Directory() {
 
   return (
     <GeneralLayout>
-      <GeneralNavbar />
+      <GeneralNavbar logged={logged} />
       <MDBox mb={2} />
       <MDBox p={2}>
         <Grid container spacing={6}>
@@ -96,5 +94,9 @@ function Directory() {
     </GeneralLayout>
   );
 }
+
+Directory.propTypes = {
+  logged: PropTypes.bool,
+};
 
 export default Directory;

@@ -12,7 +12,7 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-import React from 'react';
+import React, { useState } from 'react';
 // prop-types is library for typechecking of props
 import PropTypes from 'prop-types';
 
@@ -24,10 +24,30 @@ import Icon from '@mui/material/Icon';
 // Material Dashboard 2 React components
 import MDBox from 'components/MDBox';
 import MDTypography from 'components/MDTypography';
+import { IconButton } from '@mui/material';
+import Spinner from 'components/Spinner';
 
-function DefaultInfoCard({ color, icon, title, description, value }) {
+function DefaultInfoCard({ color, icon, title, description }) {
+  const [amount, setAmount] = useState('3 KWD');
+  const [timer, setTimer] = useState(false);
   return (
     <Card>
+      <MDBox display="flex" justifyContent="end">
+        <IconButton
+          size="medium"
+          color="inherit"
+          className="self-end"
+          onClick={() => {
+            setAmount('2 KWD');
+            setTimer(true);
+            setTimeout(() => {
+              setTimer(false);
+            }, 2000);
+          }}
+        >
+          <Icon>refresh</Icon>
+        </IconButton>
+      </MDBox>
       <MDBox p={2} mx={3} display="flex" justifyContent="center">
         <MDBox
           display="grid"
@@ -53,11 +73,15 @@ function DefaultInfoCard({ color, icon, title, description, value }) {
             {description}
           </MDTypography>
         )}
-        {description && !value ? null : <Divider />}
-        {value && (
+        {description && !amount ? null : <Divider />}
+        {amount && !timer ? (
           <MDTypography variant="h5" fontWeight="medium">
-            {value}
+            {amount}
           </MDTypography>
+        ) : (
+          <MDBox display="flex" justifyContent="center">
+            <Spinner />
+          </MDBox>
         )}
       </MDBox>
     </Card>
@@ -67,7 +91,7 @@ function DefaultInfoCard({ color, icon, title, description, value }) {
 // Setting default values for the props of DefaultInfoCard
 DefaultInfoCard.defaultProps = {
   color: 'info',
-  value: '',
+  // value: '',
   description: '',
 };
 
@@ -77,7 +101,7 @@ DefaultInfoCard.propTypes = {
   icon: PropTypes.node.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  // value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default DefaultInfoCard;
